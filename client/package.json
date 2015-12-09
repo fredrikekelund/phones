@@ -7,11 +7,11 @@
   "scripts": {
     "build": "npm-run-all build:*",
     "build:js": "browserify -d -v js/app.js -o build/app.js",
-    "build:css": "node-sass app.scss build/app.css",
+    "build:css": "node-sass --include-path node_modules app.scss build/app.css",
     "watch": "npm-run-all -p watch:*",
     "watch:js": "watchify -d js/app.js -v -o build/app.js",
-    "watch:css": "node-sass -w app.scss build/app.css",
-	"watch:test": "karma start",
+    "watch:css": "node-sass --include-path node_modules -w app.scss build/app.css",
+    "watch:test": "karma start",
     "test": "karma start --single-run"
   },
   "author": "Fredrik Ekelund <fredrik@fredrik.computer>",
@@ -29,6 +29,7 @@
     "watchify": "^3.6.1"
   },
   "dependencies": {
+    "bootstrap-sass": "^3.3.6",
     "knockout": "^3.4.0",
     "qwest": "^2.2.4"
   }

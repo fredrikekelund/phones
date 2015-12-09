@@ -1,16 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sv">
 <head>
 	<meta charset="UTF-8">
-	<title>Phones front-end</title>
+	<title>Telefontaxor</title>
+
 	<link rel="stylesheet" href="build/app.css">
+	<script src="https://use.typekit.net/iai2mny.js"></script>
+	<script>try{Typekit.load({ async: true });}catch(e){}</script>
 </head>
 <body>
-	<main>
-		<form data-bind="submit: function () { submitForm(phoneNumber()) }">
-			<input data-bind="value: phoneNumber, valueUpdate: 'input'" placeholder="073 - 123 45 67" type="text">
-			<span data-bind="text: phoneNumber"></span>
+	<main class="container-fluid">
+		<p>Mata in ett telefonnummer för att se vilken operatör som har den billigaste taxan för telefonnumrets prefix. <a href="https://docs.google.com/document/d/1H738L3yCjAj8fQa2cIqP0DY5D2UTihVhAW3tU0C5eZI/edit">Originaluppgift</a>.</p>
+
+		<form class="row" data-bind="submit: function () { submitForm(phoneNumber()) }">
+			<div class="col-sm-12 form-group">
+				<label class="sr-only" for="phone-number">Telefonnummer</label>
+				<input class="form-control" data-bind="value: phoneNumber, valueUpdate: 'input'" id="phone-number" placeholder="073 - 123 45 67" type="text">
+			</div>
+
+			<div class="col-sm-12 btn-group">
+				<button class="btn btn-primary pull-right">Hitta priser</button>
+			</div>
 		</form>
+
+		<div class="row">
+			<div class="col-xs-12">
+				<h3>Priser</h3>
+			</div>
+
+			<div class="col-xs-12">
+				<ul data-bind="foreach: operators">
+					<li data-bind="css: {cheapest: isCheapest}">
+						<span data-bind="text: name"></span>
+						<span data-bind="text: price"></span> kr
+						<span data-bind="visible: isCheapest">(Billigast!)</span>
+					</li>
+				</ul>
+			</div>
+		</div>
 	</main>
 
 	<script src="build/app.js"></script>

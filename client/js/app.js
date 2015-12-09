@@ -5,7 +5,10 @@ var ko = require("knockout"),
 	url = require("url");
 
 var App = module.exports = function () {
+	var app = this;
+
 	this.phoneNumber = ko.observable("");
+	this.operators = ko.observableArray([]);
 
 	this.cleanPhoneNumber = function (phoneNumber) {
 		return phoneNumber.replace(/\D/g, "");
@@ -23,9 +26,9 @@ var App = module.exports = function () {
 	this.submitForm = function (data) {
 		qwest.get(getApiUrl({phoneNumber: phoneNumber}))
 		.then(function (xhr, response) {
-			// Make some useful actions
+			response.forEach(app.operators.push, app.operators);
 		})
-		.catch(function (xhr, response, e) {
+		.catch(function (xhr, response, error) {
 			// Process the error
 		});
 	};
