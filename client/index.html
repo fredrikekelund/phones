@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Phones front-end</title>
+	<link rel="stylesheet" href="build/app.css">
+</head>
+<body>
+	<main>
+		<form data-bind="submit: function () { submitForm(phoneNumber()) }">
+			<input data-bind="value: phoneNumber, valueUpdate: 'input'" placeholder="073 - 123 45 67" type="text">
+			<span data-bind="text: phoneNumber"></span>
+		</form>
+	</main>
+
+	<script src="build/app.js"></script>
+</body>
+</html>
