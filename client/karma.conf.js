@@ -2,7 +2,6 @@ module.exports = function (karma) {
 	karma.set({
 		frameworks: ["browserify", "mocha", "chai"],
 		files: [
-			"build/js/*.js",
 			"test/*.js"
 		],
 		preprocessors: {

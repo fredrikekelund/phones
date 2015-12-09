@@ -11,7 +11,8 @@
     "watch": "npm-run-all -p watch:*",
     "watch:js": "watchify -d js/app.js -v -o build/app.js",
     "watch:css": "node-sass -w app.scss build/app.css",
-    "test": "karma start"
+	"watch:test": "karma start",
+    "test": "karma start --single-run"
   },
   "author": "Fredrik Ekelund <fredrik@fredrik.computer>",
   "license": "ISC",
