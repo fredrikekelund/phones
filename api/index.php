@@ -2,7 +2,6 @@
 require 'vendor/autoload.php';
 
 $app = new \Slim\Slim();
-$app->add(new \CorsSlim\CorsSlim());
 $app->add(new \SlimJson\Middleware(array(
 	'json.status' => true
 )));

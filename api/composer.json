@@ -3,7 +3,6 @@
     "description": "Back-end for phone number exercise",
     "require": {
         "slim/slim": "^2.6",
-        "palanik/corsslim": "^1.0.0",
         "dogancelik/slim-json": "^0.4.0"
     },
     "license": "ISC",
