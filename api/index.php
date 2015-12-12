@@ -8,12 +8,6 @@ $app->add(new \SlimJson\Middleware(array(
 )));
 
 
-$app->get('/', function() use ($app) {
-	$body = ['Hello' => 'World'];
-
-	$app->render(200, $body);
-});
-
 $operators = [
 	[
 		'name' => 'Operatör A',
