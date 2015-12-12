@@ -6,11 +6,11 @@
   "private": true,
   "scripts": {
     "build": "npm-run-all build:*",
-    "build:js": "browserify js/app.js -o public/app.js",
     "build:css": "node-sass scss/app.scss public/app.css",
+    "build:js": "browserify js/app.js -o public/app.js",
     "watch": "npm-run-all -p watch:*",
-    "watch:js": "watchify -d js/app.js -v -o public/app.js",
     "watch:css": "node-sass -w scss/app.scss public/app.css",
+    "watch:js": "watchify -d js/app.js -v -o public/app.js",
     "watch:test": "karma start",
     "test": "karma start --single-run"
   },
