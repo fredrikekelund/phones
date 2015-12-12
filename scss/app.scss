@@ -24,9 +24,18 @@ html {
 	font-size: $font-size-base;
 }
 
+body {
+	@media (max-width: $screen-sm-min) {
+		font-size: $font-size-small;
+	}
+}
+
 .container-fluid {
-	max-width: 25em;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 100%;
 	padding-top: 15vh;
+	width: 25em;
 }
 
 .row {
