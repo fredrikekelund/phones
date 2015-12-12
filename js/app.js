@@ -27,7 +27,7 @@ var App = module.exports = function () {
 	this.getApiUrl = function (phoneNumber) {
 		return url.format({
 			hostname: location.hostname,
-			port: 8000,
+			port: location.port,
 			pathname: "api/price/" + phoneNumber
 		});
 	};

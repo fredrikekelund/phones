@@ -15,7 +15,7 @@ describe("Phones", function () {
 	})
 
 	it("should generate a URL to the API", function () {
-		var apiUrl = "//" + location.hostname + ":8000/api/price/" + phoneNumber;
+		var apiUrl = "//" + location.hostname + ":" + location.port + "/api/price/" + phoneNumber;
 		expect(viewModel.getApiUrl(phoneNumber)).to.equal(apiUrl);
 	});
 
