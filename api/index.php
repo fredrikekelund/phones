@@ -1,5 +1,6 @@
 <?php
 require 'vendor/autoload.php';
+require './price-calculator.php';
 
 $app = new \Slim\Slim();
 $app->add(new \SlimJson\Middleware(array(
@@ -40,24 +41,8 @@ $operators = [
 ];
 
 $app->get('/price/:phoneNumber', function($phoneNumber) use ($app, $operators) {
-	$operatorPrices = array_map(function($operator) use ($phoneNumber) {
-		$cheapest = array_reduce($operator['entries'], function($result, $entry) use ($phoneNumber) {
-			$prefixMatches = strpos($phoneNumber, $entry['prefix']) === 0;
-			$prefixIsLonger = strlen($entry['prefix']) > strlen($result['prefix']);
-
-			return $prefixMatches && $prefixIsLonger ? $entry : $result;
-		}, ['prefix' => '']);
-
-		return [
-			'operator' => $operator['name'],
-			'price' => array_key_exists('price', $cheapest) ? $cheapest['price'] : null,
-			'prefix' => array_key_exists('prefix', $cheapest) ? $cheapest['prefix'] : null
-		];
-	}, $operators);
-
-	$cheapest = array_reduce($operatorPrices, function($result, $operator) {
-		return is_numeric($operator['price']) && $operator['price'] < $result['price'] ? $operator : $result;
-	}, $operatorPrices[0]);
+	$calculator = new PriceCalculator($operators);
+	$cheapest = $calculator->getLowestPrice($phoneNumber);
 
 	if (isset($cheapest['price'])) {
 		$app->render(200, $cheapest);
