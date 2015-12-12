@@ -26,6 +26,7 @@
     "karma-mocha": "^0.2.1",
     "mocha": "^2.3.4",
     "node-sass": "^3.4.2",
+    "npm-run-all": "^1.4.0",
     "watchify": "^3.6.1"
   },
   "dependencies": {
