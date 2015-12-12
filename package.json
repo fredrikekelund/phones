@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "build": "npm-run-all build:*",
-    "build:js": "browserify -d -v js/app.js -o public/app.js",
+    "build:js": "browserify js/app.js -o public/app.js",
     "build:css": "node-sass scss/app.scss public/app.css",
     "watch": "npm-run-all -p watch:*",
     "watch:js": "watchify -d js/app.js -v -o public/app.js",
