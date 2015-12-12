@@ -7,6 +7,11 @@
 class PriceCalculator
 {
 	public $priceLists;
+	public $defaultResponse = [
+		'operator' => '',
+		'prefix' => '',
+		'price' => null
+	];
 
 	function __construct(&$priceLists)
 	{
@@ -14,17 +19,17 @@ class PriceCalculator
 	}
 
 	/**
-	 * Loops over the predefined list of operators and their prices and retreives
-	 * the best price for the provided phone number. It should be said that this
-	 * method makes no assumptions about whether the lists are sorted or not. In
-	 * a real world scenario, we would probably load the lists from a database,
-	 * and we could then store the prefixes as integers and ask the database to
-	 * sort the price list for us as we request the lists. If we sorted the lists
-	 * by prefix in descending order, we would be able to more quickly exit the
-	 * loop that determines what the best matching prefix for an operator is. But
-	 * sorting the lists in the application before we loop over them to find the
-	 * best matching prefix would take more time than to simply loop over them
-	 * once in an unordered format.
+	 * Loops over the predefined list of operators and their price lists and
+	 * retreives the best price for the provided phone number. It should be said
+	 * that this method makes no assumptions about whether the lists are sorted
+	 * or not. In a real world scenario, we would probably load the lists from a
+	 * database, and we could then store the prefixes as integers and ask the
+	 * database to sort the price list for us as we request the lists. If we
+	 * sorted the lists by prefix in descending order, we would be able to more
+	 * quickly exit the loop that determines what the best matching prefix for
+	 * an operator is. But sorting the lists in the application before we loop
+	 * over them to find the best matching prefix would take more time than to
+	 * simply loop over them once in an unordered format.
 	 * @param  [String] $phoneNumber
 	 * @return [Array]
 	 */
@@ -46,7 +51,11 @@ class PriceCalculator
 		}, $this->priceLists);
 
 		return array_reduce($operatorPrices, function($result, $operator) {
-			return is_numeric($operator['price']) && $operator['price'] < $result['price'] ? $operator : $result;
-		}, $operatorPrices[0]);
+			$resultHasPrice = is_numeric($result['price']);
+			$operatorHasPrice = is_numeric($operator['price']);
+			$operatorIsCheapest = $operator['price'] < $result['price'];
+
+			return ((!$resultHasPrice && $operatorHasPrice) || ($operatorHasPrice && $operatorIsCheapest)) ? $operator : $result;
+		}, $this->defaultResponse);
 	}
 }

@@ -17,6 +17,11 @@ Back-enden är skriven i PHP och fungerar som ett enkelt REST-API (byggt på
 GET-anrop. För att installera dependencies, hämta först
 [Composer](https://getcomposer.org/), kör sedan `composer install` i `./api`.
 
+### Tester
+[phpunit](https://phpunit.de) behövs för att köra testerna, börja med att
+installera det (och alla dependencies enligt instruktionerna ovan). Kör sedan
+`phpunit test/*` i `./api`.
+
 ## Front-end
 Jag har använt mig av [npm](https://www.npmjs.com/) för att hantera dependencies
 och specificerat ett par build-skript i `package.json`. Kör `npm run build` för
@@ -25,6 +30,7 @@ mig av [knockout.js](http://knockoutjs.com/) - ett enkelt MVVM-bibliotek - och
 [Bootstrap](http://getbootstrap.com/) - ett populärt CSS-ramverk.
 
 ### Tester
-För att köra testerna behöver [node](https://nodejs.org/en/) vara installerat.
-När det är gjort, installera alla dependencies genom att köra `npm install`
-i `./client`. För att sedan köra testerna, kör `npm test` i samma mapp.
+För att köra front-end-testerna behöver [node](https://nodejs.org/en/) vara
+installerat. När det är gjort, installera alla dependencies genom att köra
+`npm install` i `./client`. För att sedan köra testerna, kör `npm test` i samma
+mapp.
