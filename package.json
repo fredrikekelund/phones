@@ -7,10 +7,10 @@
   "scripts": {
     "build": "npm-run-all build:*",
     "build:js": "browserify -d -v js/app.js -o public/app.js",
-    "build:css": "node-sass --include-path node_modules app.scss public/app.css",
+    "build:css": "node-sass scss/app.scss public/app.css",
     "watch": "npm-run-all -p watch:*",
     "watch:js": "watchify -d js/app.js -v -o public/app.js",
-    "watch:css": "node-sass --include-path node_modules -w app.scss public/app.css",
+    "watch:css": "node-sass -w scss/app.scss public/app.css",
     "watch:test": "karma start",
     "test": "karma start --single-run"
   },
