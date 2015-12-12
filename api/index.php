@@ -39,19 +39,13 @@ $operators = [
 	]
 ];
 
-$app->get('/price/:number', function($number) use ($app, $operators) {
-	$operatorPrices = array_map(function($operator) use ($number) {
-		$cheapest = array_reduce($operator['entries'], function($result, $entry) use ($number) {
-			$i = 0;
-			$matchedPrefix = '';
+$app->get('/price/:phoneNumber', function($phoneNumber) use ($app, $operators) {
+	$operatorPrices = array_map(function($operator) use ($phoneNumber) {
+		$cheapest = array_reduce($operator['entries'], function($result, $entry) use ($phoneNumber) {
+			$prefixMatches = strpos($phoneNumber, $entry['prefix']) === 0;
+			$prefixIsLonger = strlen($entry['prefix']) > strlen($result['prefix']);
 
-			while ($i < strlen($entry['prefix']) && $i < strlen($number) && $number[$i] === $entry['prefix'][$i]) {
-				$matchedPrefix .= $number[$i];
-				$i++;
-			}
-
-
-			return strlen($matchedPrefix) > strlen($result['prefix']) && strlen($matchedPrefix) === strlen($entry['prefix']) ? $entry : $result;
+			return $prefixMatches && $prefixIsLonger ? $entry : $result;
 		}, ['prefix' => '']);
 
 		return [
